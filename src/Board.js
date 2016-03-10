@@ -193,31 +193,32 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var board = this.rows();
       var limit = board.length-1;
+      var startRow, startColumn;
 
-      // we are given a row-index in the first row
-      // position is board[0][input]
+      //function to find the starting point
+      var findBoard = function (row, column) {
+        //if the input is negative
+        if (column < 0) {
+          //recurse on incremented inputs
+          findBoard(++row, ++column);
+          //otherwise
+        } else {
+          //assign startRow and startColumn variables to the final values
+          startRow = row;
+          startColumn = column;
+        }
+      };
+      findBoard(0, majorDiagonalColumnIndexAtFirstRow);
 
-      //if the given position has a value of one b[x][y]
-      if (board[0][majorDiagonalColumnIndexAtFirstRow] === 1) {
-        //recursive function
-        var conflictSearch = function (row, column) {
-          //add one to x and y
-          var row = row++;
-          var column = column++;
-          //if x or y don't exceed board.length -1
-          if (row > limit || column > limit) {
-            //stop recursing
-          } else {
-            //if b[x][y] is one
-              
-              //return true
-            //recurse
-          }
-        };
-        //call the recursive function
-        conflictSearch(0, majorDiagonalColumnIndexAtFirstRow);
-      }
-      //return false
+      
+      var count = 0;
+      //function to find conflicts
+      var findConflicts = function(row, column) {
+        if (board[row][column]) {
+          
+        }  
+      };
+      findConflicts(startRow, startColumn);
 
 
 
