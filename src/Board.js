@@ -214,12 +214,20 @@
       var count = 0;
       //function to find conflicts
       var findConflicts = function(row, column) {
-        if (board[row][column]) {
-          
-        }  
+        if (row > limit || column > limit) {
+          return;
+        } else if (board[row][column] === 1) {
+          count++;
+        }
+        findConflicts(++row, ++column);
       };
       findConflicts(startRow, startColumn);
 
+      //if more than one queen was on the diagonal
+      if (count > 1) {
+        //return true
+        return true;
+      } 
 
 
       return false; // fixme
