@@ -79,9 +79,9 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      var matrixRow = this.rows()[rowIndex];
+      var boardRow = this.rows()[rowIndex];
       var resultArray = [];
-      matrixRow.forEach(function(rowVal, idx) {
+      boardRow.forEach(function(rowVal, idx) {
         if (rowVal === 1) {
           resultArray.push(rowVal);
         }
@@ -92,19 +92,33 @@
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
       var conflict = false;
-      var matrix = this.rows();
-      matrix.forEach(function(row, idx) {
-        var rowOccupied = false;
-        row.forEach(function(val, index) {
-          if (val === 1 && !rowOccupied) {
-            rowOccupied = true;
-          } else if (val === 1 && rowOccupied) {
-            conflict = true;
-          }
-        });
+      var board = this.rows();
 
+
+      // debugger;
+      var that = this;
+      board.forEach(function(row, rowIdx) {
+        if (that.hasRowConflictAt(rowIdx)) {
+          conflict = true;
+        }
       });
+
+
       return conflict;
+
+
+      // board.forEach(function(row, idx) {
+        // var rowOccupied = false;
+      //   row.forEach(function(val, index) {
+      //     if (val === 1 && !rowOccupied) {
+      //       rowOccupied = true;
+      //     } else if (val === 1 && rowOccupied) {
+      //       conflict = true;
+      //     }
+      //   });
+
+      // });
+      // return conflict;
     },
 
 
@@ -192,7 +206,7 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var board = this.rows();
-      var limit = board.length-1;
+      var limit = board.length - 1;
       var startRow, startColumn;
 
       //function to find the starting point
