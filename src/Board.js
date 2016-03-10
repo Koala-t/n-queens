@@ -256,14 +256,14 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
 
       var board = this.rows();
-      var limit = board.length-1;
+      var limit = board.length - 1;
       var startRow, startColumn;
 
       //function to find the starting point
       var findBoard = function (row, column) {
         if (column > limit) {
           //recurse on incremented inputs
-          findBoard(--row, --column);
+          findBoard(++row, --column);
           //otherwise
         } else {
           //assign startRow and startColumn variables to the final values
@@ -271,18 +271,22 @@
           startColumn = column;
         }
       };
-      findBoard(0, majorDiagonalColumnIndexAtFirstRow);
+      findBoard(0, minorDiagonalColumnIndexAtFirstRow);
 
       
       var count = 0;
       //function to find conflicts
       var findConflicts = function(row, column) {
-        if (row > limit || column < 0) {
+        // debugger;
+        console.log(board[row][column]);
+        console.log(typeof(board[row][column]));
+        if (row >= limit || column <= 0) {
           return;
         } else if (board[row][column] === 1) {
+          debugger;
           count++;
         }
-        findConflicts(--row, --column);
+        findConflicts(++row, --column);
       };
       findConflicts(startRow, startColumn);
 
@@ -295,12 +299,22 @@
 
       return false; // fixme
     },
-    },
+    
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
-    }
+
+      var result = false;
+      var board = this.rows();
+      for (var i = 0; i < board.length + (board.length - 1); i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          result = true;
+        }
+      }
+
+      return result; // fixme
+    },
+    
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
