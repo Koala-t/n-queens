@@ -79,12 +79,32 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var matrixRow = this.rows()[rowIndex];
+      var resultArray = [];
+      matrixRow.forEach(function(rowVal, idx) {
+        if (rowVal === 1) {
+          resultArray.push(rowVal);
+        }
+      });
+      return resultArray.length > 1 ? true : false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var conflict = false;
+      var matrix = this.rows();
+      matrix.forEach(function(row, idx) {
+        var rowOccupied = false;
+        row.forEach(function(val, index) {
+          if (val === 1 && !rowOccupied) {
+            rowOccupied = true;
+          } else if (val === 1 && rowOccupied) {
+            conflict = true;
+          }
+        });
+
+      });
+      return conflict;
     },
 
 
@@ -94,11 +114,73 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      result = []; 
+      // console.log('index',colIndex);
+      //get access to the board array of array
+      var board = this.rows();
+      //iterate through the rows
+      // board.forEach(function(row) {
+
+      //   // console.log('FOOOOOOO', row[colIndex]);
+      //   // // if row's val at box-colIndex is 1
+      //   // if (row[colIndex] === 1) {
+      //   //   //add to the result array
+      //   //   result.push(1);
+      //   // }
+      //   row.forEach(function(value, j) {
+      //     if (row[colindex][j] === 1) {
+      //       result.push(1);
+      //     }
+      //   });
+
+      // }); 
+      // //if the result array is longer than 1
+      // return result.length > 1 ? true : false;
+      
+      //return true
+      //otherwise
+      //return false
+      var columnOccupied = false;
+      for (var i = 0; i < board.length; i++) {
+        var row = board[i];
+        console.log('row', row);
+        console.log('colIndex', colIndex);
+        console.log('row[col]', row[colIndex]);
+        if (row[colIndex] === 1 && !columnOccupied) {
+          columnOccupied = true;
+        } else if (row[colIndex] === 1 && columnOccupied) {
+          return true;
+        }
+      }
+
+      return false;
+
+
+
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      //make a result array
+      var result = [];
+      //make a matrix array
+      var board = this.rows();
+      //iterate through the array
+      for (var i = 0; i < board.length; i++) { //in the first iteration y is 0
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+        // var array = [];
+        // for (var x = 0; x < board[y].length; x++) {
+        //   if (board[y][x] === 1) {
+        //     array.push(1);
+        //   }
+        //   if (array.length > 1) {
+        //     return true;
+        //   }
+        // }
+      }
       return false; // fixme
     },
 
@@ -109,6 +191,36 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var board = this.rows();
+      var limit = board.length-1;
+
+      // we are given a row-index in the first row
+      // position is board[0][input]
+
+      //if the given position has a value of one b[x][y]
+      if (board[0][majorDiagonalColumnIndexAtFirstRow] === 1) {
+        //recursive function
+        var conflictSearch = function (row, column) {
+          //add one to x and y
+          var row = row++;
+          var column = column++;
+          //if x or y don't exceed board.length -1
+          if (row > limit || column > limit) {
+            //stop recursing
+          } else {
+            //if b[x][y] is one
+              
+              //return true
+            //recurse
+          }
+        };
+        //call the recursive function
+        conflictSearch(0, majorDiagonalColumnIndexAtFirstRow);
+      }
+      //return false
+
+
+
       return false; // fixme
     },
 
