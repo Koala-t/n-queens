@@ -254,7 +254,47 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+
+      var board = this.rows();
+      var limit = board.length-1;
+      var startRow, startColumn;
+
+      //function to find the starting point
+      var findBoard = function (row, column) {
+        if (column > limit) {
+          //recurse on incremented inputs
+          findBoard(--row, --column);
+          //otherwise
+        } else {
+          //assign startRow and startColumn variables to the final values
+          startRow = row;
+          startColumn = column;
+        }
+      };
+      findBoard(0, majorDiagonalColumnIndexAtFirstRow);
+
+      
+      var count = 0;
+      //function to find conflicts
+      var findConflicts = function(row, column) {
+        if (row > limit || column < 0) {
+          return;
+        } else if (board[row][column] === 1) {
+          count++;
+        }
+        findConflicts(--row, --column);
+      };
+      findConflicts(startRow, startColumn);
+
+      //if more than one queen was on the diagonal
+      if (count > 1) {
+        //return true
+        return true;
+      } 
+
+
       return false; // fixme
+    },
     },
 
     // test if any minor diagonals on this board contain conflicts
