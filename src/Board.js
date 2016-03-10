@@ -143,9 +143,9 @@
       var columnOccupied = false;
       for (var i = 0; i < board.length; i++) {
         var row = board[i];
-        console.log('row', row);
-        console.log('colIndex', colIndex);
-        console.log('row[col]', row[colIndex]);
+        // console.log('row', row);
+        // console.log('colIndex', colIndex);
+        // console.log('row[col]', row[colIndex]);
         if (row[colIndex] === 1 && !columnOccupied) {
           columnOccupied = true;
         } else if (row[colIndex] === 1 && columnOccupied) {
@@ -278,14 +278,16 @@
       //function to find conflicts
       var findConflicts = function(row, column) {
         // debugger;
-        console.log(board[row][column]);
-        console.log(typeof(board[row][column]));
-        if (row >= limit || column <= 0) {
+        // console.log(board[row][column]);
+        // console.log(typeof(board[row][column]));
+        if (row > limit || column < 0) {
           return;
         } else if (board[row][column] === 1) {
-          debugger;
+          // debugger;
           count++;
         }
+        console.log("Board", board);
+        console.log("row", row, "column", column );
         findConflicts(++row, --column);
       };
       findConflicts(startRow, startColumn);
