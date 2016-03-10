@@ -235,7 +235,16 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var result = false;
+      var board = this.rows();
+      for (var i = -(board.length - 1); i < board.length; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          result = true;
+        }
+      }
+
+
+      return result; // fixme
     },
 
 
