@@ -81,6 +81,7 @@
     hasRowConflictAt: function(rowIndex) {
       var boardRow = this.rows()[rowIndex];
       var resultArray = [];
+
       boardRow.forEach(function(rowVal, idx) {
         if (rowVal === 1) {
           resultArray.push(rowVal);
@@ -105,20 +106,6 @@
 
 
       return conflict;
-
-
-      // board.forEach(function(row, idx) {
-        // var rowOccupied = false;
-      //   row.forEach(function(val, index) {
-      //     if (val === 1 && !rowOccupied) {
-      //       rowOccupied = true;
-      //     } else if (val === 1 && rowOccupied) {
-      //       conflict = true;
-      //     }
-      //   });
-
-      // });
-      // return conflict;
     },
 
 
@@ -132,34 +119,12 @@
       // console.log('index',colIndex);
       //get access to the board array of array
       var board = this.rows();
-      //iterate through the rows
-      // board.forEach(function(row) {
-
-      //   // console.log('FOOOOOOO', row[colIndex]);
-      //   // // if row's val at box-colIndex is 1
-      //   // if (row[colIndex] === 1) {
-      //   //   //add to the result array
-      //   //   result.push(1);
-      //   // }
-      //   row.forEach(function(value, j) {
-      //     if (row[colindex][j] === 1) {
-      //       result.push(1);
-      //     }
-      //   });
-
-      // }); 
-      // //if the result array is longer than 1
-      // return result.length > 1 ? true : false;
-      
-      //return true
-      //otherwise
-      //return false
       var columnOccupied = false;
+      //iterate through the rows
+     
+      
       for (var i = 0; i < board.length; i++) {
         var row = board[i];
-        // console.log('row', row);
-        // console.log('colIndex', colIndex);
-        // console.log('row[col]', row[colIndex]);
         if (row[colIndex] === 1 && !columnOccupied) {
           columnOccupied = true;
         } else if (row[colIndex] === 1 && columnOccupied) {
@@ -300,8 +265,8 @@
           // debugger;
           count++;
         }
-        console.log("Board", board);
-        console.log("row", row, "column", column );
+        // console.log("Board", board);
+        // console.log("row", row, "column", column );
         findConflicts(++row, --column);
       };
       findConflicts(startRow, startColumn);
